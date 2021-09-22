@@ -1,0 +1,24 @@
+{
+  "name": "air-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "public": "http-server -p 3700",
+    "server": "nodemon ./src/server.js",
+    "start": "npm-run-all --parallel server public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@briza/air": "^0.1.0",
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-server": "^13.0.2",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5"
+  }
+}
