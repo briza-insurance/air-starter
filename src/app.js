@@ -1,40 +1,44 @@
 const API_URL = 'http://localhost:3000';
 
 document.addEventListener('DOMContentLoaded', async function () {
-  const businessClassesRes = await fetch(`${API_URL}/business-classes`, {
-    method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
-  });
-  const businessClassesJson = await businessClassesRes.json();
-  const businessClasses = businessClassesJson.data;
-
-  const workersCompensationClassesByStateRes = await fetch(`${API_URL}/workers-compensation-classes-by-states`, {
-    method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
-  });
-  const workersCompensationClassesByState = await workersCompensationClassesByStateRes.json();
-
-  const preApplication = await fetch(`${API_URL}/pre-applications`, {
+  const businessClassesPromise = fetch(`${API_URL}/business-classes`, {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
     }),
   });
 
-  let preApplicationJson = await preApplication.json();
+  const workersCompensationClassesByStatePromise = fetch(`${API_URL}/workers-compensation-classes-by-states`, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+  });
 
-  const questions = preApplicationJson.questionnaire.questions;
-  const sections = preApplicationJson.questionnaire.layout;
+  const preApplicationPromise = fetch(`${API_URL}/pre-applications`, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+  });
+
+  const promisesRes = await Promise.all([
+    businessClassesPromise,
+    workersCompensationClassesByStatePromise,
+    preApplicationPromise,
+  ]);
+
+  const businessClassesJson = await promisesRes[0].json();
+
+  const workersCompensationClassesByState = await promisesRes[1].json();
+
+  const preApplicationJson = await promisesRes[2].json();
 
   const questionnaire = document.createElement('air-questionnaire');
-  questionnaire.businessClasses = businessClasses;
+  questionnaire.businessClasses = businessClassesJson.data;
   questionnaire.workersCompensationClassesByState = JSON.parse(workersCompensationClassesByState);
-  questionnaire.questions = questions;
-  questionnaire.sections = sections;
+  questionnaire.questions = preApplicationJson.questionnaire.questions;
+  questionnaire.sections = preApplicationJson.questionnaire.layout;
   questionnaire.answers = {};
 
   document.body.appendChild(questionnaire);
