@@ -1,21 +1,21 @@
-const API_URL = 'http://localhost:3000';
+const CUSTOMER_API_URL = 'http://localhost:3000';
 
 document.addEventListener('DOMContentLoaded', async function () {
-  const businessClassesPromise = fetch(`${API_URL}/business-classes`, {
+  const businessClassesPromise = fetch(`${CUSTOMER_API_URL}/business-classes`, {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
     }),
   });
 
-  const workersCompensationClassesByStatePromise = fetch(`${API_URL}/workers-compensation-classes-by-states`, {
+  const workersCompensationClassesByStatePromise = fetch(`${CUSTOMER_API_URL}/workers-compensation-classes-by-states`, {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
     }),
   });
 
-  const preApplicationPromise = fetch(`${API_URL}/pre-applications`, {
+  const preApplicationPromise = fetch(`${CUSTOMER_API_URL}/pre-applications`, {
     method: 'GET',
     headers: new Headers({
       'Content-Type': 'application/json',
