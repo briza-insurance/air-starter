@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
   const preApplicationPromise = fetch(`${CUSTOMER_API_URL}/pre-applications`, {
-    method: 'GET',
+    method: 'POST',
     headers: new Headers({
       'Content-Type': 'application/json',
     }),

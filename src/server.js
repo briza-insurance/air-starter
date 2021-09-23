@@ -99,7 +99,7 @@ app.get('/workers-compensation-classes-by-states', async (_, res) => {
   res.json(JSON.stringify(allResponseDate));
 });
 
-app.get('/pre-applications', async (_, res) => {
+app.post('/pre-applications', async (_, res) => {
   const preApplication = await axios.post(
     `${BRIZA_API_URL}/pre-applications`,
     {
