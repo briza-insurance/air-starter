@@ -19,6 +19,8 @@ const HEADERS = {
   Authorization: `ApiKey ${BRIZA_API_KEY}`,
 };
 
+app.use(express.json());
+
 app.get('/', (_, res) => {
   res.send('Hi!');
 });
@@ -102,6 +104,19 @@ app.get('/pre-applications', async (_, res) => {
     `${BRIZA_API_URL}/pre-applications`,
     {
       brokerageId: BROKERAGE_ID,
+    },
+    {
+      headers: HEADERS,
+    }
+  );
+  res.json(preApplication.data);
+});
+
+app.patch('/pre-applications', async (req, res) => {
+  const preApplication = await axios.patch(
+    `${BRIZA_API_URL}/pre-applications/${req.body.applicationId}`,
+    {
+      answers: req.body.answers,
     },
     {
       headers: HEADERS,

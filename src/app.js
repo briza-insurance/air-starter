@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', async function () {
   questionnaire.sections = preApplicationJson.questionnaire.layout;
   questionnaire.answers = {};
 
+  questionnaire.addEventListener('air-questionnaire-update', async (event) => {
+    if (!event.detail.completed) return;
+    await fetch(`${CUSTOMER_API_URL}/pre-applications`, {
+      method: 'PATCH',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ answers: event.detail.answers, applicationId: preApplicationJson.id }),
+    });
+  });
+
   document.body.appendChild(questionnaire);
 
   document.getElementById('loading').remove();
