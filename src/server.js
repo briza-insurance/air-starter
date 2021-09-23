@@ -24,7 +24,7 @@ app.get('/', (_, res) => {
 });
 
 app.get('/business-classes', async (_, res) => {
-  const businessClasses = await axios.get(`${BRIZA_API_URL}/business-classes`, {
+  const businessClasses = await axios.get(`${BRIZA_API_URL}/business-classes?nested=true`, {
     headers: HEADERS,
   });
   res.json(businessClasses.data);
