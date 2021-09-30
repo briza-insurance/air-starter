@@ -8,7 +8,7 @@ Use this application as a starting point in building your own commercial insuran
 
 ## Requirements
 
-1. Your [Briza API key + Brokerage ID](https://www.briza.com/get-an-api-key). This is **required** in order to make requests to Briza's API and return a questionset.
+1. Your [Briza API key + Brokerage ID](https://www.briza.com/get-an-api-key). This is **required** in order to make requests to Briza's API and return a question set.
 2. A [Google Maps API key](https://developers.google.com/maps/documentation/javascript/overview). This is **optional**, and can be used to automatically populate suggestions from Google Places during address lookup.
 
 ## Step 1: Initial installation
@@ -27,7 +27,7 @@ Copy `.env.example` to `.env` and paste in values for:
 
 - `BRIZA_API_KEY`: Your private API key
 
-- `BROKERAG_ID`: The unique ID of the brokerage
+- `BROKERAGE_ID`: The unique ID of the brokerage
 
 #### Optional: Set a Google Maps API key (Optional)
 
