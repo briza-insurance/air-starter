@@ -1,10 +1,10 @@
 # Air starter - Vanilla JavaScript
 
-A plug-and-play starter application built using [Briza Air](https://air.briza.com)'s Questionnaire component on the frontend and Node/Express JS on the backend for server-to-server communication hitting the [Briza API](https://www.briza.com/get-an-api-key).
+A plug-and-play starter application built using [Briza Air](https://air.briza.com)'s Questionnaire component on the frontend and Node/Express JS on the backend for server-to-server communication hitting the [Briza API](https://www.briza.com/developers).
 
 ## Who's this for?
 
-Use this application as a starting point in building your own commercial insurance rater if you are a Briza dev-partner that has received credentials (Briza API key + Brokerage ID).
+Use this application as a starting point in building your own commercial insurance experience if you have received your credentials (Briza API key + Brokerage ID).
 
 ## Requirements
 
@@ -47,6 +47,6 @@ If the above steps have been followed successfully, you should now see Briza's P
 
 ## Useful links
 
-- [Briza Air](https://air.briza.com)
-- [Briza API](https://www.briza.com/get-an-api-key)
-- [Briza.com](https://www.briza.com)
+- [Briza Air](https://air.briza.com) - A web components library designed to help developers create the best experience for merchants who use Briza API.
+- [Briza API](https://www.briza.com/developers) - Tools that developers can use to build apps that help small businesses get insurance.
+- [Briza.com](https://www.briza.com) - Briza's homepage.

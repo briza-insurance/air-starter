@@ -1,13 +1,13 @@
 // Customer API URL
-const CUSTOMER_API_URL = "http://localhost:3000";
+const CUSTOMER_API_URL = 'http://localhost:3000';
 
 // Runs when the page is loaded
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', async function () {
   // Creating business classes fetch promise object
   const businessClassesPromise = fetch(`${CUSTOMER_API_URL}/business-classes`, {
-    method: "GET",
+    method: 'GET',
     headers: new Headers({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     }),
   });
 
@@ -15,18 +15,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   const workersCompensationClassesByStatePromise = fetch(
     `${CUSTOMER_API_URL}/workers-compensation-classes-by-states`,
     {
-      method: "GET",
+      method: 'GET',
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
     }
   );
 
   // Create a pre-application
   const preApplicationPromise = fetch(`${CUSTOMER_API_URL}/pre-applications`, {
-    method: "POST",
+    method: 'POST',
     headers: new Headers({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     }),
   });
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const preApplicationJson = await promisesRes[2].json();
 
   // Creating Air Queestionnaire HTML custom element and assigning properties to it
-  const questionnaire = document.createElement("air-questionnaire");
+  const questionnaire = document.createElement('air-questionnaire');
   questionnaire.businessClasses = businessClassesJson.data;
   questionnaire.workersCompensationClassesByState = JSON.parse(
     workersCompensationClassesByState
@@ -54,14 +54,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   questionnaire.answers = {};
 
   // Adding event listener that listens for answers to change in the questionnaire
-  questionnaire.addEventListener("air-questionnaire-update", async (event) => {
+  questionnaire.addEventListener('air-questionnaire-update', async (event) => {
     // Checks if application is completed
     if (!event.detail.completed) return;
     // Sending answers to server side
     await fetch(`${CUSTOMER_API_URL}/pre-applications`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: new Headers({
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
       body: JSON.stringify({
         answers: event.detail.answers,
@@ -73,12 +73,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Appending component to HTML body element
   document.body.appendChild(questionnaire);
 
-  document.getElementById("loading").remove();
+  document.getElementById('loading').remove();
 
   // Creating button to validate answers passed through the Questionnaire component
-  const button = document.createElement("air-button");
-  button.innerHTML = "Validate";
-  button.addEventListener("click", () => {
+  const button = document.createElement('air-button');
+  button.innerHTML = 'Validate';
+  button.addEventListener('click', () => {
     // Invoking validate method, which triggers the air-questionnaire-update custom event
     questionnaire.validate();
   });

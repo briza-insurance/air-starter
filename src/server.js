@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
-const dotenv = require("dotenv");
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const dotenv = require('dotenv');
 
 const app = express();
 
@@ -18,19 +18,19 @@ const BROKERAGE_ID = process.env.BROKERAGE_ID;
 
 // Defining headers for API calls
 const HEADERS = {
-  "Content-Type": "application/json",
+  'Content-Type': 'application/json',
   Authorization: `ApiKey ${BRIZA_API_KEY}`,
 };
 
 app.use(express.json());
 
 // Root endpoint
-app.get("/", (_, res) => {
-  res.send("This is the response from the root endpoint!");
+app.get('/', (_, res) => {
+  res.send('This is the response from the root endpoint!');
 });
 
 // Business classes endpoint
-app.get("/business-classes", async (_, res) => {
+app.get('/business-classes', async (_, res) => {
   const businessClasses = await axios.get(
     `${BRIZA_API_URL}/business-classes?nested=true`,
     {
@@ -41,59 +41,59 @@ app.get("/business-classes", async (_, res) => {
 });
 
 // Workers compensation classes endpoint
-app.get("/workers-compensation-classes-by-states", async (_, res) => {
+app.get('/workers-compensation-classes-by-states', async (_, res) => {
   const states = [
-    "AK",
-    "AL",
-    "AR",
-    "AZ",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "DC",
-    "FL",
-    "GA",
-    "HI",
-    "IA",
-    "ID",
-    "IL",
-    "IN",
-    "KS",
-    "KY",
-    "LA",
-    "MA",
-    "MD",
-    "ME",
-    "MI",
-    "MN",
-    "MO",
-    "MS",
-    "MT",
-    "NC",
-    "ND",
-    "NE",
-    "NH",
-    "NJ",
-    "NM",
-    "NV",
-    "NY",
-    "OH",
-    "OK",
-    "OR",
-    "PA",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VA",
-    "VT",
-    "WA",
-    "WI",
-    "WV",
-    "WY",
+    'AK',
+    'AL',
+    'AR',
+    'AZ',
+    'CA',
+    'CO',
+    'CT',
+    'DE',
+    'DC',
+    'FL',
+    'GA',
+    'HI',
+    'IA',
+    'ID',
+    'IL',
+    'IN',
+    'KS',
+    'KY',
+    'LA',
+    'MA',
+    'MD',
+    'ME',
+    'MI',
+    'MN',
+    'MO',
+    'MS',
+    'MT',
+    'NC',
+    'ND',
+    'NE',
+    'NH',
+    'NJ',
+    'NM',
+    'NV',
+    'NY',
+    'OH',
+    'OK',
+    'OR',
+    'PA',
+    'RI',
+    'SC',
+    'SD',
+    'TN',
+    'TX',
+    'UT',
+    'VA',
+    'VT',
+    'WA',
+    'WI',
+    'WV',
+    'WY',
   ];
 
   const statesPromises = states.map((state) => {
@@ -112,7 +112,7 @@ app.get("/workers-compensation-classes-by-states", async (_, res) => {
 });
 
 // Endpoint to create pre-application
-app.post("/pre-applications", async (_, res) => {
+app.post('/pre-applications', async (_, res) => {
   const preApplication = await axios.post(
     `${BRIZA_API_URL}/pre-applications`,
     {
@@ -126,7 +126,7 @@ app.post("/pre-applications", async (_, res) => {
 });
 
 // Patch request with updated answers
-app.patch("/pre-applications", async (req, res) => {
+app.patch('/pre-applications', async (req, res) => {
   const preApplication = await axios.patch(
     `${BRIZA_API_URL}/pre-applications/${req.body.applicationId}`,
     {
