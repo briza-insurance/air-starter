@@ -1,6 +1,6 @@
 # Air starter - Vanilla JavaScript
 
-A plug-and-play starter application built using [Briza Air](https://air.briza.com)'s Questionnaire component on the frontend and Node/Express JS on the backend for server-to-server communication hitting the [Briza API](https://www.briza.com/developers).
+A plug-and-play starter application built using [Briza Air](https://air.briza.com)'s Questionnaire component on the frontend and Node/Express JS on the backend for server-to-server communication hitting the [Briza API](https://api.briza.com).
 
 ## Who's this for?
 
@@ -48,5 +48,5 @@ If the above steps have been followed successfully, you should now see Briza's P
 ## Useful links
 
 - [Briza Air](https://air.briza.com) - A web components library designed to help developers create the best experience for merchants who use Briza API.
-- [Briza API](https://www.briza.com/developers) - Tools that developers can use to build apps that help small businesses get insurance.
+- [Briza API](https://api.briza.com) - Tools that developers can use to build apps that help small businesses get insurance.
 - [Briza.com](https://www.briza.com) - Briza's homepage.
