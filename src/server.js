@@ -45,7 +45,7 @@ app.get('/business-classes', async (_, res) => {
 
   const allResponse = await Promise.all(pagePromises);
 
-  const allResponseDate = allResponse
+  const allResponseData = allResponse
     .map((item) => item.data)
     .reduce(
       (acc, item) => {
@@ -53,7 +53,7 @@ app.get('/business-classes', async (_, res) => {
       },
       { data: [] }
     );
-  res.json(allResponseDate);
+  res.json(allResponseData);
 });
 
 // Workers compensation classes endpoint
@@ -118,10 +118,10 @@ app.get('/workers-compensation-classes-by-states', async (_, res) => {
     });
   });
   const allResponse = await Promise.all(statesPromises);
-  const allResponseDate = allResponse.map((item, index) => {
+  const allResponseData = allResponse.map((item, index) => {
     return { [states[index]]: item.data };
   });
-  res.json(JSON.stringify(allResponseDate));
+  res.json(JSON.stringify(allResponseData));
 });
 
 // Endpoint to create pre-application
