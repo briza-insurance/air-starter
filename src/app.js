@@ -12,15 +12,12 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
 
   // Creating workers comp fetch promise object
-  const workersCompensationClassesByStatePromise = fetch(
-    `${CUSTOMER_API_URL}/workers-compensation-classes-by-states`,
-    {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    }
-  );
+  const workersCompensationClassesByStatePromise = fetch(`${CUSTOMER_API_URL}/workers-compensation-classes-by-states`, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+    }),
+  });
 
   // Create a pre-application
   const preApplicationPromise = fetch(`${CUSTOMER_API_URL}/pre-applications`, {
@@ -43,12 +40,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   const preApplicationJson = await promisesRes[2].json();
 
-  // Creating Air Queestionnaire HTML custom element and assigning properties to it
+  // Creating Air Questionnaire HTML custom element and assigning properties to it
   const questionnaire = document.createElement('air-questionnaire');
   questionnaire.businessClasses = businessClassesJson.data;
-  questionnaire.workersCompensationClassesByState = JSON.parse(
-    workersCompensationClassesByState
-  );
+  questionnaire.workersCompensationClassesByState = JSON.parse(workersCompensationClassesByState);
   questionnaire.questions = preApplicationJson.questionnaire.questions;
   questionnaire.sections = preApplicationJson.questionnaire.layout;
   questionnaire.answers = {};
