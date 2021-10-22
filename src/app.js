@@ -1,46 +1,42 @@
 // Customer API URL
 const CUSTOMER_API_URL = 'http://localhost:3000';
 
-// Runs when the page is loaded
+const HEADERS = new Headers({
+  'Content-Type': 'application/json',
+});
+
+// Load questionnaire when the page is loaded
 document.addEventListener('DOMContentLoaded', async function () {
-  // Creating business classes fetch promise object
+  // Business classes fetch promise object
   const businessClassesPromise = fetch(`${CUSTOMER_API_URL}/business-classes`, {
     method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
+    headers: HEADERS,
   });
 
-  // Creating workers comp fetch promise object
+  // Workers compensation classes fetch promise object
   const workersCompensationClassesByStatePromise = fetch(`${CUSTOMER_API_URL}/workers-compensation-classes-by-states`, {
     method: 'GET',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
+    headers: HEADERS,
   });
 
-  // Create a pre-application
+  // Pre-application fetch promise object
   const preApplicationPromise = fetch(`${CUSTOMER_API_URL}/pre-applications`, {
     method: 'POST',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
+    headers: HEADERS,
   });
 
-  // Bundling all promises into one variable
-  const promisesRes = await Promise.all([
+  // Loading questionnaire data
+  const [businessClassesRes, workersCompensationClassesByStateRes, preApplicationRes] = await Promise.all([
     businessClassesPromise,
     workersCompensationClassesByStatePromise,
     preApplicationPromise,
   ]);
 
-  const businessClassesJson = await promisesRes[0].json();
+  const businessClassesJson = await businessClassesRes.json();
+  const workersCompensationClassesByState = await workersCompensationClassesByStateRes.json();
+  const preApplicationJson = await preApplicationRes.json();
 
-  const workersCompensationClassesByState = await promisesRes[1].json();
-
-  const preApplicationJson = await promisesRes[2].json();
-
-  // Creating Air Questionnaire HTML custom element and assigning properties to it
+  // Creating questionnaire element and assigning properties to it
   const questionnaire = document.createElement('air-questionnaire');
   questionnaire.businessClasses = businessClassesJson.data;
   questionnaire.workersCompensationClassesByState = workersCompensationClassesByState;
@@ -48,33 +44,32 @@ document.addEventListener('DOMContentLoaded', async function () {
   questionnaire.sections = preApplicationJson.questionnaire.layout;
   questionnaire.answers = {};
 
-  // Adding event listener that listens for answers to change in the questionnaire
+  // Listening questionnaire answers on change event
   questionnaire.addEventListener('air-questionnaire-update', async (event) => {
-    // Checks if application is completed
+    // Checking if application is completed
     if (!event.detail.completed) return;
-    // Sending answers to server side
+    // Sending answers to server
     await fetch(`${CUSTOMER_API_URL}/pre-applications`, {
       method: 'PATCH',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
+      headers: HEADERS,
       body: JSON.stringify({
         answers: event.detail.answers,
         applicationId: preApplicationJson.id,
       }),
-    });
+    }).catch((err) => console.error(err));
   });
 
-  // Appending component to HTML body element
+  // Appending questionnaire element to the body
   document.body.appendChild(questionnaire);
 
+  // Removing loading element from the DOM
   document.getElementById('loading').remove();
 
-  // Creating button to validate answers passed through the Questionnaire component
+  // Creating button to validate answers passed through the questionnaire
   const button = document.createElement('air-button');
   button.innerHTML = 'Validate';
   button.addEventListener('click', () => {
-    // Invoking validate method, which triggers the air-questionnaire-update custom event
+    // Validating questionnaire answers, which triggers the air-questionnaire-update custom event
     questionnaire.validate();
   });
   document.body.appendChild(button);
