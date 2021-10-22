@@ -125,7 +125,7 @@ app.get('/workers-compensation-classes-by-states', async (_, res) => {
   res.json(localWorkersCompensationClasses);
 });
 
-// Endpoint to create pre-application
+// Pre-application endpoint
 app.post('/pre-applications', async (_, res) => {
   const preApplication = await axios.post(
     `${BRIZA_API_URL}/pre-applications`,
