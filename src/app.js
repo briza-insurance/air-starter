@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   // Creating Air Questionnaire HTML custom element and assigning properties to it
   const questionnaire = document.createElement('air-questionnaire');
   questionnaire.businessClasses = businessClassesJson.data;
-  questionnaire.workersCompensationClassesByState = JSON.parse(workersCompensationClassesByState);
+  questionnaire.workersCompensationClassesByState = workersCompensationClassesByState;
   questionnaire.questions = preApplicationJson.questionnaire.questions;
   questionnaire.sections = preApplicationJson.questionnaire.layout;
   questionnaire.answers = {};

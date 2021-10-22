@@ -118,10 +118,11 @@ app.get('/workers-compensation-classes-by-states', async (_, res) => {
     });
   });
   const allResponse = await Promise.all(statesPromises);
-  const allResponseData = allResponse.map((item, index) => {
-    return { [states[index]]: item.data };
+  const localWorkersCompensationClasses = {};
+  allResponse.forEach((item, index) => {
+    localWorkersCompensationClasses[states[index]] = item.data.data;
   });
-  res.json(JSON.stringify(allResponseData));
+  res.json(localWorkersCompensationClasses);
 });
 
 // Endpoint to create pre-application
