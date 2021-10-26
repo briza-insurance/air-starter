@@ -34,26 +34,7 @@ app.get('/business-classes', async (_, res) => {
   const businessClasses = await axios.get(`${BRIZA_API_URL}/business-classes`, {
     headers: HEADERS,
   });
-
-  const pages = [...Array(businessClasses.data.pagination.pages).keys()];
-
-  const pagePromises = pages.map((page) => {
-    return axios.get(`${BRIZA_API_URL}/business-classes?page=${page + 1}`, {
-      headers: HEADERS,
-    });
-  });
-
-  const allResponse = await Promise.all(pagePromises);
-
-  const allResponseData = allResponse
-    .map((item) => item.data)
-    .reduce(
-      (acc, item) => {
-        return { data: [...acc.data, ...item.data] };
-      },
-      { data: [] }
-    );
-  res.json(allResponseData);
+  res.json(businessClasses.data);
 });
 
 // Workers compensation classes endpoint
