@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   questionnaire.workersCompensationClassesByState = workersCompensationClassesByState;
   questionnaire.questions = preApplicationJson.questionnaire.questions;
   questionnaire.sections = preApplicationJson.questionnaire.layout;
-  questionnaire.answers = {};
+  questionnaire.answers = { NumberOfLocations: 1 };
 
   // Listening questionnaire answers on change event
   questionnaire.addEventListener('air-questionnaire-update', async (event) => {
