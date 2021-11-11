@@ -33,6 +33,9 @@ app.get('/', (_, res) => {
 app.get('/business-classes', async (_, res) => {
   const businessClasses = await axios.get(`${BRIZA_API_URL}/business-classes`, {
     headers: HEADERS,
+    params: {
+      brokerageId: BROKERAGE_ID,
+    },
   });
   res.json(businessClasses.data);
 });
@@ -94,8 +97,11 @@ app.get('/workers-compensation-classes-by-states', async (_, res) => {
   ];
 
   const statesPromises = states.map((state) => {
-    return axios.get(`${BRIZA_API_URL}/workers-compensation-class-codes?state=${state}`, {
+    return axios.get(`${BRIZA_API_URL}/workers-compensation-class-codes`, {
       headers: HEADERS,
+      params: {
+        state,
+      },
     });
   });
   const allResponse = await Promise.all(statesPromises);
